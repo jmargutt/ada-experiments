@@ -8,6 +8,7 @@ from pyquadkey2 import quadkey
 
 
 def calculate_tile_bbox(row):
+    print(row)
     qk = str(quadkey.from_geo((row['latitude'], row['longitude']), 14))
     b = mercantile.bounds(mercantile.quadkey_to_tile(qk))
     return box(b.west, b.south, b.east, b.north)
