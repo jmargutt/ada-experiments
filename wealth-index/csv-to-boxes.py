@@ -26,10 +26,11 @@ def csv_to_raster(input_csv, output_vector):
 
     # read csv
     df = pd.read_csv(input_csv)
-    print(df.head())
 
     df['geometry'] = df.apply(calculate_tile_bbox, axis=0)
     gdf = gpd.GeoDataFrame(df, geometry=df['geometry'])
+    print(gdf.head())
+
     gdf.to_file(output_vector, driver='GPKG')
 
 
