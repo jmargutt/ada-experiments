@@ -8,7 +8,6 @@ from pyquadkey2 import quadkey
 
 
 def calculate_tile_bbox(row):
-    print(row)
     qk = str(quadkey.from_geo((row['latitude'], row['longitude']), 14))
     b = mercantile.bounds(mercantile.quadkey_to_tile(qk))
     return box(b.west, b.south, b.east, b.north)
@@ -27,11 +26,9 @@ def csv_to_raster(input_csv, output_vector):
 
     # read csv
     df = pd.read_csv(input_csv)
-    print(df.head())
 
     df['geometry'] = df.apply(calculate_tile_bbox, axis=1)
     gdf = gpd.GeoDataFrame(df, geometry=df['geometry'])
-    print(gdf.head())
 
     gdf.to_file(output_vector, driver='GPKG')
 
