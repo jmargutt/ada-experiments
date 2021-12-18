@@ -29,6 +29,7 @@ def csv_to_raster(input_csv, output_vector):
 
     df['geometry'] = df.apply(calculate_tile_bbox, axis=1)
     gdf = gpd.GeoDataFrame(df, geometry=df['geometry'])
+    gdf = gdf.drop(columns=['latitude', 'longitude'])
 
     gdf.to_file(output_vector, driver='GPKG')
 
