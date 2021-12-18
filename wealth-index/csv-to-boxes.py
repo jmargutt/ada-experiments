@@ -26,6 +26,7 @@ def csv_to_raster(input_csv, output_vector):
 
     # read csv
     df = pd.read_csv(input_csv)
+    print(df.head())
 
     gdf = gpd.GeoDataFrame(df, geometry=gpd.points_from_xy(df.longitude, df.latitude))
     gdf['geometry'] = gdf.apply(calculate_tile_bbox, axis=0)
